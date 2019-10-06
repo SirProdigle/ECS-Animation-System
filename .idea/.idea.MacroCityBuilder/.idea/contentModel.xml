@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\rogue\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\rogue\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_MacroCityBuilder.-395432448.00" t="ExcludeRecursive" />
+    <e p="D:\Coding\Projects\MacroCityBuilder" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Animation System" t="Include">
+          <e p="Components" t="Include">
+            <e p="MeshData.cs" t="Include" />
+          </e>
+          <e p="Gameobjects" t="Include">
+            <e p="MaterialStore.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="InstancedShader.shader" t="Include" />
+          </e>
+          <e p="SpriteSheetAnimation.cs" t="Include" />
+          <e p="Systems" t="Include">
+            <e p="SpriteSheetRenderer.cs" t="Include" />
+            <e p="SpriteSheetRenderer_OLD.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Testing.cs" t="Include" />
+        <e p="Tilesets" t="Include">
+          <e p="README.txt" t="Include" />
+        </e>
+      </e>
+      <e p="MacroCityBuilder.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
