@@ -18,7 +18,7 @@ public class Testing : MonoBehaviour
 
     // Start is called before the first frame update
     private void Awake() {
-        EntityManager manager = World.Active.EntityManager;
+        EntityManager manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         EntityArchetype archetype = manager.CreateArchetype(
             typeof(Translation),
             typeof(UniqueAnimationData),
@@ -26,7 +26,7 @@ public class Testing : MonoBehaviour
             typeof(SpriteSheetData),
             typeof(MeshData)
         );
-        NativeArray<Entity> entities = new NativeArray<Entity>(4000, Allocator.Temp);
+        NativeArray<Entity> entities = new NativeArray<Entity>(10000, Allocator.Temp);
         manager.CreateEntity(archetype, entities);
         MeshData mesh = new MeshData(1, 1, 0);
         foreach (Entity e in entities) {
@@ -60,7 +60,7 @@ public class Testing : MonoBehaviour
             float uvHeight = 1 / math.ceil(((float) spriteSheetData.TotalCells / (float) spriteSheetData.CellsPerRow));
             spriteSheetData.GridUVs.x = uvWidth;
             spriteSheetData.GridUVs.y = uvHeight;
-            manager.SetSharedComponentData(e,
+            manager.SetComponentData(e,
                 new SpriteSheetData() {
                     TotalCells = spriteSheetData.TotalCells,
                     CellsPerRow = spriteSheetData.CellsPerRow,

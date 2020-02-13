@@ -40,7 +40,13 @@ namespace Prutils.SpriteAnimation
 
 
 //Holds the data of a spritesheet, e.g how many cells, list of animations and their cells, and a frametimer counter
-    public struct SpriteSheetData : ISharedComponentData
+/*
+ * TODO This should NOT be a componentData. Perhaps a BlobAssetReference or dictionary of int to SSD. This is READONLYDATA that does NOT change. It is simply the readonly data
+ * for each spritesheet (num cells, per row, UV's etc. So for all characters that use the hero spritesheet, this is all the same. Originally had this as SharedData, but that
+ * makes no sense if it does not change. Discord told me to look into BlobAssetReference or a Dictionary/Array that entities stare an int id for. for now though it works with
+ * burst
+ */
+    public struct SpriteSheetData : IComponentData
     {
         public int TotalCells;
         public int CellsPerRow;
@@ -61,12 +67,13 @@ namespace Prutils.SpriteAnimation
     {
        
         [BurstCompile]
-        public struct Job : IJobForEachWithEntity<UniqueAnimationData,Translation>
+        public new struct Job : IJobForEachWithEntity<UniqueAnimationData,Translation, SpriteSheetData>
         {
             public float deltaTime;
-            
-            public void Execute(Entity e, int index, ref UniqueAnimationData uniqueAnimationData, ref Translation translation) {
-                SpriteSheetData spriteSheetData = World.Active.EntityManager.GetSharedComponentData<SpriteSheetData>(e);
+
+            [BurstCompile]
+            public void Execute(Entity e, int index, ref UniqueAnimationData uniqueAnimationData, ref Translation translation, ref SpriteSheetData ssd) {
+                SpriteSheetData spriteSheetData = ssd;
                 AnimationClip currentAnimation = uniqueAnimationData.currentClip; //Grab our current animation
                 
                 
@@ -111,8 +118,8 @@ namespace Prutils.SpriteAnimation
         protected override JobHandle OnUpdate(JobHandle inputDeps) {
             BufferFromEntity<AnimationClip> animationClips = GetBufferFromEntity<AnimationClip>();
             Job job = new Job() {
-                    deltaTime = Time.deltaTime
-                };
+                    deltaTime = Time.DeltaTime,
+            };
                 return job.Schedule(this, inputDeps);
             }
         

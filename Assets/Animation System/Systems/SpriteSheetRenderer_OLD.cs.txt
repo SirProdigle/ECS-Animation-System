@@ -18,7 +18,7 @@ namespace Prutils.SpriteAnimation
         //TODO Basically re-do this code once per different sprite tag, e.g once for User and once for Goblins, then we do 1 draw call per spritesheet
         protected override void OnUpdate() {
             //Get our entity reference
-            EntityManager entityManager = World.Active.EntityManager;
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             EntityQuery
                 entityQuery =
                     GetEntityQuery(
